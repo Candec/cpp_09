@@ -1,5 +1,5 @@
 
-CC	=				c++
+CC	=				clang++
 CFLAGS =			-std=c++98 -g -Wall -Werror -Wextra
 # CFLAGS =			-Wall -Werror -Wextra -std=c++98 -g
 RM =				rm -rf

@@ -13,16 +13,18 @@
 #ifndef BITCOINEXCHANGE_HPP
 # define BITCOINEXCHANGE_HPP
 
-#include <map>
-#include <iostream>
-#include <fstream>
-#include <sstream>
+# include <map>
+# include <iostream>
+# include <fstream>
+# include <sstream>
 
 // I will use map as it is a great type for big amounts of data which are going
 // to remain unaltered, such as in the case of the historic price of a currency
 
 class BitcoinExchange
 {
+	typedef std::map<std::string, float> BE;
+
 	public:
 
 	BitcoinExchange(BE data);
@@ -30,11 +32,10 @@ class BitcoinExchange
 	BitcoinExchange &operator = (BitcoinExchange const &src);
 	~BitcoinExchange();
 
-	void RateCalc(std::string line);
+	float RateCalc(std::string line);
+	void printMap();
 
 	private:
-	
-	typedef std::map<std::string, float> BE;
 
 	BE _data;
 
@@ -42,6 +43,6 @@ class BitcoinExchange
 	bool _ReadDate(std::string date);
 	bool _ReadValue(std::string value);
 
-}
+};
 
 #endif
