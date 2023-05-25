@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 07:55:46 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/05/22 00:50:00 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/05/25 09:27:03 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ rpn::rpn(std::string &str)
 			break;
 		}
 	}
+
+	printQueue();
+
 }
 
 rpn::rpn(rpn const &src)
@@ -64,7 +67,7 @@ bool rpn::rpnValidator(std::string s)
 	if (isOperator(s))
 		return (true);
 
-	int n = string2int(s);
+	float n = string2float(s);
 	std::istringstream(s) >> n;
 	if (n >= 0 && n  <= 10)
 		return (true);
@@ -79,9 +82,9 @@ bool rpn::isOperator(std::string s)
 	return (false);
 }
 
-int rpn::string2int(std::string s)
+float rpn::string2float(std::string s)
 {
-	int n;
+	float n;
 
 	std::istringstream(s) >> n;
 
@@ -91,7 +94,75 @@ int rpn::string2int(std::string s)
 		return (-1);
 }
 
-void calculate()
+float rpn::calculator(float a, float b, std::string c)
 {
+	if (c == "+")
+		return (a + b);
+	else if (c == "-")
+		return (a - b);
+	else if (c == "x")
+		return (a * b);
+	else if (c == "/")
+		return (a / b);
+	return (0);
+}
+
+void rpn::calculate()
+{
+	float a;
+	float b;
+	float result;
+	size_t i = 0;
+	std::string c;
+
+	if (i == 0)
+	{
+		a = string2float(queue.front());
+		queue.pop();
+		b = string2float(queue.front());
+		queue.pop();
+		c = queue.front();
+		queue.pop();
+	}
+
+	if (a == -1 || b == -1 || !isOperator(c))
+		return ;
+
+	while (!queue.empty())
+	{
+		if (i == 0)
+			result = calculator(a, b, c);
+
+		c = queue.front();
+		if (!isOperator(c))
+		{
+			a = string2float(c);
+			queue.pop();
+		}
+
+		c = queue.front();
+		if (!isOperator(c))
+		{
+			b = string2float(c);
+			queue.pop();
+			std::ostringstream ss;
+			ss << result;
+			std::string s(ss.str());
+			queue.push(s);
+		}
+
+		c = queue.front();
+		if (!isOperator(c))
+		{
+			std::cout << "Error: invalid operation" << c << std::endl;
+			break ;
+		}
+		calculator(result);
+		i++;
+
+	}
+
+
+
 
 }

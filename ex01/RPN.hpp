@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 07:55:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/05/21 20:29:31 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/05/25 08:52:25 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ class rpn
 	std::queue <std::string> queue;
 	bool rpnValidator(std::string s);
 	bool isOperator(std::string s);
-	int string2int(std::string s);
+	float string2float(std::string s);
+	float rpn::calculator(float a, float b, std::string c);
+
 
 };
 
