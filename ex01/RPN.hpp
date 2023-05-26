@@ -6,14 +6,15 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 07:55:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/05/25 08:52:25 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:21:01 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RPN_HPP
 # define RPN_HPP
 
-# include <queue>
+# include <vector>
+# include <stack>
 # include <iostream>
 # include <sstream>
 
@@ -27,16 +28,12 @@ class rpn
 	rpn &operator = (rpn const &src);
 	~rpn();
 
-	void printQueue();
-	void calculate();
+	void calculate(std::string &input);
+	int calculator(int a, int b, char c);
 
 	private:
 
-	std::queue <std::string> queue;
-	bool rpnValidator(std::string s);
-	bool isOperator(std::string s);
-	float string2float(std::string s);
-	float rpn::calculator(float a, float b, std::string c);
+	std::stack <int> stack;
 
 
 };

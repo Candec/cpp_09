@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 07:55:46 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/05/25 09:27:03 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:28:32 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,15 @@
 
 rpn::rpn(std::string &str)
 {
-	std::stringstream ss(str);
-	std::string tk;
-
-	while (std::getline(ss, tk, ' '))
+	try
 	{
-		if (rpnValidator(tk))
-			queue.push(tk);
-		else
-		{
-			queue.empty();
-			std::cout << "Error: invalid input: " << tk << std::endl;
-			break;
-		}
-	}
+		calculate(str);
 
-	printQueue();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
 }
 
@@ -41,7 +34,7 @@ rpn::rpn(rpn const &src)
 rpn& rpn::operator = (rpn const &src)
 {
 	if(this != &src)
-		this->queue = src.queue;
+		this->stack = src.stack;
 	return (*this);
 }
 
@@ -50,119 +43,67 @@ rpn::~rpn()
 
 }
 
-void rpn::printQueue()
+void printStack(std::stack<int> s)\
 {
-	std::queue <std::string> copy;
-	copy = queue;
+	std::stack<int> copy = s;
 
-	while (!copy.empty())
+	for (size_t i = 0; i < copy.size(); i++)
 	{
-		std::cout << copy.front() << std::endl;
+		std::cout << copy.top() << " ";
 		copy.pop();
 	}
+	std::cout << std::endl;
 }
 
-bool rpn::rpnValidator(std::string s)
+int rpn::calculator(int a, int b, char c)
 {
-	if (isOperator(s))
-		return (true);
-
-	float n = string2float(s);
-	std::istringstream(s) >> n;
-	if (n >= 0 && n  <= 10)
-		return (true);
-
-	return (false);
-}
-
-bool rpn::isOperator(std::string s)
-{
-	if (s == "x" || s == "/" || s == "+" || s == "-")
-		return (true);
-	return (false);
-}
-
-float rpn::string2float(std::string s)
-{
-	float n;
-
-	std::istringstream(s) >> n;
-
-	if (n <= 0 && n >= 10)
-		return (n);
-	else
-		return (-1);
-}
-
-float rpn::calculator(float a, float b, std::string c)
-{
-	if (c == "+")
+	if (c == '+')
 		return (a + b);
-	else if (c == "-")
+	else if (c == '-')
 		return (a - b);
-	else if (c == "x")
+	else if (c == '*')
 		return (a * b);
-	else if (c == "/")
-		return (a / b);
+	else if (c == '/')
+	{
+		if (b == 0)
+			throw std::invalid_argument("Cannot divide by Zero\n");
+		return (b / a);
+	}
 	return (0);
 }
 
-void rpn::calculate()
+void rpn::calculate(std::string &str)
 {
-	float a;
-	float b;
-	float result;
-	size_t i = 0;
-	std::string c;
 
-	if (i == 0)
+	size_t n;
+	size_t op;
+	std::string operators = "+-*/";
+
+	n = 0;
+	op = 0;
+
+	for (size_t i = 0; i < str.length(); i++)
 	{
-		a = string2float(queue.front());
-		queue.pop();
-		b = string2float(queue.front());
-		queue.pop();
-		c = queue.front();
-		queue.pop();
+		if (isdigit(str[i]))
+		{
+			n++;
+			stack.push(str[i] - '0');
+		}
+		else if (operators.find(str[i]) != std::string::npos)
+		{
+			op++;
+			int a = stack.top();
+			stack.pop();
+			stack.top() = calculator(a, stack.top(), str[i]);
+		}
+		else if (isspace(str[i]))
+			continue;
+		else
+			throw std::invalid_argument("Error: invalid input\n");
 	}
 
-	if (a == -1 || b == -1 || !isOperator(c))
-		return ;
+	if ((op + 1) != n)
+		throw std::invalid_argument("Error: invalid input - Insuficiente operators or numbers\n");
 
-	while (!queue.empty())
-	{
-		if (i == 0)
-			result = calculator(a, b, c);
-
-		c = queue.front();
-		if (!isOperator(c))
-		{
-			a = string2float(c);
-			queue.pop();
-		}
-
-		c = queue.front();
-		if (!isOperator(c))
-		{
-			b = string2float(c);
-			queue.pop();
-			std::ostringstream ss;
-			ss << result;
-			std::string s(ss.str());
-			queue.push(s);
-		}
-
-		c = queue.front();
-		if (!isOperator(c))
-		{
-			std::cout << "Error: invalid operation" << c << std::endl;
-			break ;
-		}
-		calculator(result);
-		i++;
-
-	}
-
-
-
-
+	std::cout << stack.top() << std::endl;
 }
