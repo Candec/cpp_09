@@ -5,6 +5,9 @@ BLUE="\033[34m"
 RESET="\033[0m"
 RED="\033[31m"
 
+# For testing the results you can use the website:
+# https://www.dcode.fr/reverse-polish-notation
+
 
 printf "$BLUE%s""Test[0] => 3 2 1 + *\n"
 out=$(./RPN "3 2 1 + *")
