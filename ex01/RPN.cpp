@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 07:55:46 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/05/26 09:28:32 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/06/03 11:17:05 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,25 @@ void printStack(std::stack<int> s)\
 int rpn::calculator(int a, int b, char c)
 {
 	if (c == '+')
-		return (a + b);
+	{
+		// std::cout << a << " + " << b << " = " << a + b << std::endl;
+		return (b + a);
+	}
 	else if (c == '-')
-		return (a - b);
+	{
+		// std::cout << b << " - " << a << " = " << b - a << std::endl;
+		return (b - a);
+	}
 	else if (c == '*')
-		return (a * b);
+	{
+		// std::cout << a << " * " << b << " = " << a * b << std::endl;
+		return (b * a);
+	}
 	else if (c == '/')
 	{
 		if (b == 0)
 			throw std::invalid_argument("Cannot divide by Zero\n");
+		// std::cout << a << " / " << b << " = " << a / b << std::endl;
 		return (b / a);
 	}
 	return (0);
