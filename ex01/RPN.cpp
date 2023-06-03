@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 07:55:46 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/06/03 11:17:05 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:29:43 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ rpn::rpn(std::string &str)
 	{
 		std::cerr << e.what() << '\n';
 	}
-
 }
 
 rpn::rpn(rpn const &src)

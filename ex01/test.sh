@@ -89,20 +89,7 @@ else
 }
 fi
 
-printf "$BLUE%s""Test[6]: Invalid input => (1 + 1) \n"
-out=$(./RPN "(1 + 1)")
-if [ "$out" = "Error: invalid input" ]; then
-    printf "$GREEN%s""      Good: "$RESET
-    printf	"$BLUE%s""Your Output =   [$out]\n\n"$RESET
-else
-{
-    printf "$RED%s""        Wrong\n"$RESET
-    printf	"$BLUE%s""Your Output =   [$out]\n"$RESET
-    printf	"$GREEN%s""Correct Value = [Error: invalid input]\n\n"$RESET
-}
-fi
-
-printf "$BLUE%s""Test[7] => 1 2 * 2 / 5 + 46 * 6 / 8 * 2 / + 2 * 2 - \n"
+printf "$BLUE%s""Test[6] => 1 2 * 2 / 5 + 46 * 6 / 8 * 2 / + 2 * 2 - \n"
 out=$(./RPN "12 * 2 / 5 + 46 * 6 / 8 * 2 / + 2 * 2 -")
 if [ "$out" = "42" ]; then
     printf "$GREEN%s""      Good: "$RESET
@@ -115,7 +102,7 @@ else
 }
 fi
 
-printf "$BLUE%s""Test[8] => 9 8 * 4 * 4 / 2 + 9 - 8 - 8 - 1 - 6 -\n"
+printf "$BLUE%s""Test[7] => 9 8 * 4 * 4 / 2 + 9 - 8 - 8 - 1 - 6 -\n"
 out=$(./RPN "98 * 4 * 4 / 2 + 9 - 8 - 8 - 1 - 6 -")
 if [ "$out" = "42" ]; then
     printf "$GREEN%s""      Good: "$RESET
@@ -125,5 +112,31 @@ else
     printf "$RED%s""        Wrong\n"$RESET
     printf	"$BLUE%s""Your Output =   [$out]\n"$RESET
     printf	"$GREEN%s""Correct Value = [42]\n\n"$RESET
+}
+fi
+
+printf "$BLUE%s""Test[8]: Invalid input => (1 + 1) \n"
+out=$(./RPN "(1 + 1)")
+if [ "$out" = "Error: invalid input" ]; then
+    printf "$GREEN%s""      Good: "$RESET
+    printf	"$BLUE%s""Your Output =   [$out]\n\n"$RESET
+else
+{
+    printf "$RED%s""        Wrong\n"$RESET
+    printf	"$BLUE%s""Your Output =   [$out]\n"$RESET
+    printf	"$GREEN%s""Correct Value = [Error: invalid input]\n\n"$RESET
+}
+fi
+
+printf "$BLUE%s""Test[9]: Invalid input => 1 1 1 1 1 \n"
+out=$(./RPN "1 1 1 1 1")
+if [ "$out" = "Error: invalid input" ]; then
+    printf "$GREEN%s""      Good: "$RESET
+    printf	"$BLUE%s""Your Output =   [$out]\n\n"$RESET
+else
+{
+    printf "$RED%s""        Wrong\n"$RESET
+    printf	"$BLUE%s""Your Output =   [$out]\n"$RESET
+    printf	"$GREEN%s""Correct Value = [Error: invalid input]\n\n"$RESET
 }
 fi

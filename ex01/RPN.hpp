@@ -6,14 +6,13 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 07:55:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/05/26 09:21:01 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/06/03 13:12:47 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RPN_HPP
 # define RPN_HPP
 
-# include <vector>
 # include <stack>
 # include <iostream>
 # include <sstream>

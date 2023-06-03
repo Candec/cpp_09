@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/03 12:01:23 by jibanez-          #+#    #+#             */
+/*   Updated: 2023/06/03 17:43:02 by jibanez-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PMERGEME_HPP
+# define PMERGEME_HPP
+
+# include <iostream>
+# include <sstream>
+# include <list>
+# include <vector>
+
+class ms
+{
+	public:
+		ms(char *str);
+		ms(ms const &src);
+		ms &operator=(ms const &src);
+		~ms();
+
+
+	private:
+		std::vector<int> _vector;
+
+		void printVector(std::vector<int> vector);
+		bool isSort(std::vector<int> vector);
+		std::list<std::vector<int>> sort(std::list<std::vector<int>>);
+		std::list<std::vector<int>> split(std::vector<int> vector);
+		std::vector<int> join(std::list<std::vector<int>> list);
+};
+
+#endif
