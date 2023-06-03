@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 12:01:23 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/06/03 17:43:02 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/06/03 22:45:22 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 class ms
 {
 	public:
+		ms();
 		ms(char *str);
 		ms(ms const &src);
 		ms &operator=(ms const &src);
