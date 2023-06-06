@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 16:23:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/06/04 01:31:11 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/06/07 00:52:49 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void ms::printVector(std::vector<int> vector)
 	for (size_t i = 0; i < vector.size(); i++)
 	{
 		if (i > 10)
+		{
+			std::cout << "[...]";
 			break;
+		}
 		std::cout << vector[i] << " ";
 	}
 }
@@ -82,12 +85,13 @@ std::vector<int> ms::sort(std::vector<int> vector)
 
 	std::list<std::vector <int> > list;
 
-	list = split(vector);
-
-	list.front() = sort(list.front());
-	list.back() = sort(list.back());
-
-	vector = join(list);
+	if (vector.size() > 1)
+	{
+		list = split(vector);
+		list.front() = sort(list.front());
+		list.back() = sort(list.back());
+		vector = join(list);
+	}
 
 	return (vector);
 }
@@ -121,12 +125,38 @@ std::vector<int> ms::join(std::list<std::vector<int> > list)
 	std::vector<int> vectorA = list.front();
 	std::vector<int> vectorB = list.back();
 
-	// necesita hacerse el join de forma ordenada. Los elementos más pequeños primero;
-	for (size_t i = 0; i < vectorA.size(); i++)
-		vector.push_back(vectorA[i]);
+	if (vectorA.empty())
+		return (vectorB);
 
-	for (size_t i = 0; i < vectorB.size(); i++)
-		vector.push_back(vectorB[i]);
+	if (vectorB.empty())
+		return (vectorA);
+
+	size_t a = 0;
+	size_t b = 0;
+
+	while (vector.size() < vectorA.size() + vectorB.size())
+	{
+		if (vectorB[b] == 0 && vectorA[a] > 0)
+		{
+			vector.push_back(vectorA[a]);
+			a++;
+		}
+		else if (vectorA[a] == 0 && vectorB[b] > 0)
+		{
+			vector.push_back(vectorB[b]);
+			b++;
+		}
+		else if (vectorA[a] < vectorB[b] && a < vectorA.size())
+		{
+			vector.push_back(vectorA[a]);
+			a++;
+		}
+		else if (vectorB[b] <= vectorA[a] && b < vectorB.size())
+		{
+			vector.push_back(vectorB[b]);
+			b++;
+		}
+	}
 
 	return (vector);
 }
