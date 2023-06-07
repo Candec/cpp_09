@@ -6,13 +6,16 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 16:23:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/06/07 00:52:49 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:59:47 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include<unistd.h>
+
 
 //shuf -i 1-100000 -n 3000 | tr "\n" " "
+// ./PmergeMe "48 1 3 8 64 44 9 96 43 32 12 72 49 100 80 40 99 29 7 45 94 87 15 53 95 86 74 78 81 91 24 92 83 7 35"
 
 ms::ms()
 {
@@ -60,7 +63,7 @@ void ms::printVector(std::vector<int> vector)
 {
 	for (size_t i = 0; i < vector.size(); i++)
 	{
-		if (i > 10)
+		if (i > 100)
 		{
 			std::cout << "[...]";
 			break;
@@ -134,8 +137,18 @@ std::vector<int> ms::join(std::list<std::vector<int> > list)
 	size_t a = 0;
 	size_t b = 0;
 
+	std::cout << "VA before: [ ";
+	printVector(vectorA);
+	std::cout << "] | size: " << vectorA.size() << std::endl;
+
+	std::cout << "VB before: [ ";
+	printVector(vectorB);
+	std::cout << "] | size: " << vectorB.size() << std::endl << std::endl;
+
 	while (vector.size() < vectorA.size() + vectorB.size())
 	{
+		std::cout << "Vsize: " << vector.size() << std::endl;
+		std::cout << "VA[ " << a << " ]: " << vectorA[a] << " | VB[ " << b << " ]: " << vectorB[b]  << std::endl << std::endl;
 		if (vectorB[b] == 0 && vectorA[a] > 0)
 		{
 			vector.push_back(vectorA[a]);
@@ -156,7 +169,19 @@ std::vector<int> ms::join(std::list<std::vector<int> > list)
 			vector.push_back(vectorB[b]);
 			b++;
 		}
+
+		std::cout << "V after: [ ";
+		printVector(vector);
+		std::cout << "] | size: " << vector.size() << std::endl;
+
+		std::cout << " ------------ " << std::endl;
+
+		// unsigned int microsecond = 1000000;
+		// usleep(2 * microsecond);//sleeps for 3 second
+
 	}
+
+
 
 	return (vector);
 }
