@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 16:23:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/06/07 11:59:47 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:14:06 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ ms::ms()
 
 }
 
-ms::ms(char *str)
+ms::ms(const char *str)
 {
 	std::stringstream ss(str);
 	std::string n;
@@ -137,24 +137,24 @@ std::vector<int> ms::join(std::list<std::vector<int> > list)
 	size_t a = 0;
 	size_t b = 0;
 
-	std::cout << "VA before: [ ";
-	printVector(vectorA);
-	std::cout << "] | size: " << vectorA.size() << std::endl;
+	// std::cout << "VA before: [ ";
+	// printVector(vectorA);
+	// std::cout << "] | size: " << vectorA.size() << std::endl;
 
-	std::cout << "VB before: [ ";
-	printVector(vectorB);
-	std::cout << "] | size: " << vectorB.size() << std::endl << std::endl;
+	// std::cout << "VB before: [ ";
+	// printVector(vectorB);
+	// std::cout << "] | size: " << vectorB.size() << std::endl << std::endl;
 
 	while (vector.size() < vectorA.size() + vectorB.size())
 	{
-		std::cout << "Vsize: " << vector.size() << std::endl;
-		std::cout << "VA[ " << a << " ]: " << vectorA[a] << " | VB[ " << b << " ]: " << vectorB[b]  << std::endl << std::endl;
-		if (vectorB[b] == 0 && vectorA[a] > 0)
+		// std::cout << "Vsize: " << vector.size();
+		// std::cout << " | VA[ " << a << " ]: " << vectorA[a] << " | VB[ " << b << " ]: " << vectorB[b]  << std::endl << std::endl;
+		if (b == vectorB.size() && vectorA[a] > 0)
 		{
 			vector.push_back(vectorA[a]);
 			a++;
 		}
-		else if (vectorA[a] == 0 && vectorB[b] > 0)
+		else if (a == vectorA.size() && vectorB[b] > 0)
 		{
 			vector.push_back(vectorB[b]);
 			b++;
@@ -170,18 +170,14 @@ std::vector<int> ms::join(std::list<std::vector<int> > list)
 			b++;
 		}
 
-		std::cout << "V after: [ ";
-		printVector(vector);
-		std::cout << "] | size: " << vector.size() << std::endl;
-
-		std::cout << " ------------ " << std::endl;
+		// std::cout << "V after: [ ";
+		// printVector(vector);
+		// std::cout << "] | size: " << vector.size() << std::endl;
+		// std::cout << " ------------ " << std::endl;
 
 		// unsigned int microsecond = 1000000;
 		// usleep(2 * microsecond);//sleeps for 3 second
 
 	}
-
-
-
 	return (vector);
 }
