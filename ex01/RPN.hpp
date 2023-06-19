@@ -22,6 +22,7 @@ class rpn
 
 	public:
 
+	rpn();
 	rpn(std::string &str);
 	rpn(rpn const &src);
 	rpn &operator = (rpn const &src);

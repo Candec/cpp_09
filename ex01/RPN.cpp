@@ -12,6 +12,11 @@
 
 #include "RPN.hpp"
 
+rpn::rpn()
+{
+
+}
+
 rpn::rpn(std::string &str)
 {
 	try
