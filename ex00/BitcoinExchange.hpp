@@ -27,21 +27,22 @@ class BitcoinExchange
 
 	public:
 
-	BitcoinExchange(BE data);
-	BitcoinExchange(BitcoinExchange const &src);
-	BitcoinExchange &operator = (BitcoinExchange const &src);
-	~BitcoinExchange();
+		BitcoinExchange();
+		BitcoinExchange(BE data);
+		BitcoinExchange(BitcoinExchange const &src);
+		BitcoinExchange &operator = (BitcoinExchange const &src);
+		~BitcoinExchange();
 
-	float RateCalc(std::string line);
-	void printMap();
+		float RateCalc(std::string line);
+		void printMap();
 
 	private:
 
-	BE _data;
+		BE _data;
 
-	bool _ReadLine(std::string line);
-	bool _ReadDate(std::string date);
-	bool _ReadValue(std::string value);
+		bool _ReadLine(std::string line);
+		bool _ReadDate(std::string date);
+		bool _ReadValue(std::string value);
 
 };
 

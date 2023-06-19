@@ -12,6 +12,11 @@
 
 #include "BitcoinExchange.hpp"
 
+BitcoinExchange::BitcoinExchange()
+{
+	
+}
+
 BitcoinExchange::BitcoinExchange(BE data)
 {
 	_data = data;
